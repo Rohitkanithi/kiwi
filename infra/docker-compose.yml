@@ -18,6 +18,33 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
+  
+  backend:
+    build:
+      context: ../backend
+    container_name: kiwi-backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/kiwi
+      SPRING_DATASOURCE_USERNAME: kiwi
+      SPRING_DATASOURCE_PASSWORD: kiwi_dev_password
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: ../frontend
+    container_name: kiwi-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
 
 volumes:
   kiwi_pg_data:

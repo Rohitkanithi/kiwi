@@ -1,0 +1,22 @@
+# Java / Spring
+backend/target/
+backend/.mvn/
+backend/*.class
+backend/HELP.md
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+
+# Env
+*.env
+!*.env.example

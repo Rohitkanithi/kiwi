@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: kiwi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kiwi
+      POSTGRES_PASSWORD: kiwi_dev_password
+      POSTGRES_DB: kiwi
+    ports:
+      - "5432:5432"
+    volumes:
+      - kiwi_pg_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: kiwi-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+volumes:
+  kiwi_pg_data:
